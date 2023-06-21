@@ -1,3 +1,56 @@
-<section class="w-full min-h-screen flex justify-center items-center">
-	<p>Home works!</p>
+<section class="w-full h-screen flex justify-evenly gap-10 items-start px-10 py-10">
+	<div class="h-5/6 flex flex-col justify-center bg-[#1F1B24] px-8 py-2 rounded-xl">
+		<div class="flex justify-between items-center text-white font-bold tracking-widest px-5">
+			<span class="text-xl">Crypts</span>
+			<span class="text-lg">Currency: <span class="px-2 py-1 text-[#03DAC5]">USD</span></span>
+		</div>
+		<div *ngIf="data.length" class="h-5/6 flex flex-col pt-2 overflow-auto">
+			<table class="table-auto border-separate border-spacing-2">
+				<thead>
+					<tr>
+						<th class="bg-[#03DAC5] px-8 rounded-sm sticky top-0">Rank</th>
+						<th class="bg-[#03DAC5] px-16 rounded-sm sticky top-0">Coin</th>
+						<th class="bg-[#03DAC5] px-4 rounded-sm sticky top-0">Current&nbsp;Price</th>
+						<th class="bg-[#03DAC5] px-4 rounded-sm sticky top-0">Price&nbsp;change&nbsp;(in&nbsp;%)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of data">
+						<td class="text-gray-200 text-center">{{item.market_cap_rank}} - <span class="uppercase italic">{{item.symbol}}</span></td>
+						<td class="text-gray-200 text-center font-semibold">{{item.name}}</td>
+						<td class="text-gray-200 text-center">{{item.current_price}}</td>
+						<td [ngClass]="(item.price_change_percentage_24h < 0) ? 'bg-red-400 text-gray-900' : 'text-gray-200'" class="text-center rounded-lg">{{item.price_change_percentage_24h}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div [ngClass]="data.length ? 'hidden' : ''" class="w-full h-full flex justify-center items-center px-24">
+			<span *ngIf="!data.length" class="text-white text-2xl uppercase italic">OOPS!! Seems like there is problem<br /> in fetching data, retry in a bit</span>
+		</div>
+	</div>
+	<div>
+		<p class="py-1 bg-[#03DAC5] rounded-sm text-center text-black font-bold">Latest News in Cryptocurrency world!</p>
+		<div>
+			<ul class="flex flex-col gap-5 py-2">
+				<li>
+					<div class="flex flex-col">
+						<span class="text-white text-xl">Title of the news goes here</span>
+						<span class="text-white text-sm font-light italic">Author name - 19.02.2023</span>
+					</div>
+				</li>
+				<li>
+					<div class="flex flex-col">
+						<span class="text-white text-xl">Title of the news goes here. This is a very huge and big title</span>
+						<span class="text-white text-sm font-light italic">Author name - 19.02.2023</span>
+					</div>
+				</li>
+				<li>
+					<div class="flex flex-col">
+						<span class="text-white text-xl">Title of the news goes here.</span>
+						<span class="text-white text-sm font-light italic">Author name - 19.02.2023</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
 </section>

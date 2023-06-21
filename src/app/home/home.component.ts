@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiDataService } from '../api-data.service'
 
 @Component({
   selector: 'app-home',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
+  data: any = []
+  // newsData: any = []
+  constructor(private apiData: ApiDataService) {
+    this.apiData.getCoinsList().subscribe(coinData => {
+      this.data = coinData
+    })
+  }
 }
