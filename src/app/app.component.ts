@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { AuthService } from './auth.service'
+import { Component } from '@angular/core'
+import { SocialAuthService } from '@abacritt/angularx-social-login'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,26 @@ import { AuthService } from './auth.service'
 })
 export class AppComponent {
   title: string = 'TheCrypt'
-  constructor(public auth: AuthService) {}
+  user: any
+  loggedIn: boolean = false
+
+  constructor(
+    private router: Router,
+    private authService: SocialAuthService
+  ) {}
+
+  ngOnInit() {
+    this.authService.authState.subscribe(user => {
+      this.user = user
+      this.loggedIn = !!user
+    })
+  }
   
   logout() {
-    this.auth.logout()
+    this.authService.signOut().then(res => {
+      this.user = null
+      this.loggedIn = false
+      if(this.router.url === '/profile') this.router.navigate(['home'])
+    })
   }
 }

@@ -8,7 +8,6 @@ import { ApiDataService } from '../api-data.service'
 })
 export class HomeComponent {
   data: any = []
-  // newsData: any = []
   constructor(private apiData: ApiDataService) {
     this.apiData.getCoinsList().subscribe(coinData => {
       this.data = coinData

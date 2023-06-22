@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router'
-import { AuthService } from '../auth.service'
+import { Component } from '@angular/core'
+import { SocialAuthService } from '@abacritt/angularx-social-login'
 
 @Component({
   selector: 'app-profile',
@@ -9,10 +8,12 @@ import { AuthService } from '../auth.service'
 })
 
 export class ProfileComponent {
-  constructor(private auth: AuthService) {}
-  currentUser: string = localStorage.getItem('username') || ""
+  constructor(private authService: SocialAuthService) {}
+  currentUser: string = ""
 
-  logout() {
-    this.auth.logout()
+  ngOnInit() {
+    this.authService.authState.subscribe(user => {
+      this.currentUser = user.name
+    })
   }
 }

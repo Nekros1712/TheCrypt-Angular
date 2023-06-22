@@ -22,15 +22,13 @@
     </div>
 
     <div class="flex gap-4 items-center text-xl text-white">
-      <span *ngIf="this.auth.isAuthenticated()" class="tracking-wider">
-        <a routerLink="/profile">My Bag</a>
+      <span *ngIf="user" class="tracking-wider">
+        <a routerLink="/profile">{{ user.name }}</a>
       </span>
-      <span *ngIf="this.auth.isAuthenticated()">
+      <span *ngIf="user">
         <button (click)="logout()" class="tracking-wider px-4 py-1 border border-gray-300 rounded-md">Logout</button>
       </span>
-      <span *ngIf="!this.auth.isAuthenticated()">
-        <button routerLink="/login" class="tracking-wider px-4 py-1 border border-gray-300 rounded-md">Login</button>
-      </span>
+      <asl-google-signin-button *ngIf="!user" type="standard" size="medium" theme="filled_black"></asl-google-signin-button>
     </div>
   </div>
   <router-outlet></router-outlet>
