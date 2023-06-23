@@ -1,7 +1,7 @@
-<section class="w-full flex flex-col justify-center overflow-hidden">
-  <div class="w-full flex justify-between bg-[#121212] px-12 py-4">
-    <div class="flex items-center gap-12">
-      <div class="flex items-center gap-2">
+<section class="w-screen flex flex-col justify-center md:overflow-hidden">
+  <div class="w-full flex flex-col md:flex-row md:items-center justify-between bg-[#121212] md:px-12 gap-3 md:py-4">
+    <div class="flex flex-col md:flex-row items-center gap-5 md:gap-12">
+      <div class="flex items-center gap-2 pt-4 md:pt-0">
         <svg class="h-12 w-12" version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 400 400">
           <title>TheCrypt</title>
@@ -10,10 +10,10 @@
           <path id="T " fill="#ffffff" aria-label="T"
             d="M340.02 256.32L343.82 253.94Q358.55 271.52 358.55 288.62Q358.55 306.19 350.47 318.54Q342.39 331.37 324.34 339.92Q306.29 348.94 283.49 348.94L88.74 348.93Q74.02 348.93 56.44 351.78Q38.39 354.63 31.27 357.48L31.27 297.63L36.02 298.11L36.02 306.18Q36.02 317.58 44.09 325.66Q52.17 334.21 63.09 334.68L153.34 334.69L153.36 50.16Q152.88 33.06 138.16 24.51Q131.03 20.71 122.96 20.71L116.78 20.71L116.78 15.96L220.81 15.96L220.81 20.71L214.63 20.71Q202.28 20.71 193.73 29.26Q184.71 37.81 184.23 49.69L184.22 334.69L283.49 334.69Q321.49 334.69 338.6 310.47Q347.62 298.12 347.62 284.34Q347.62 271.04 340.02 256.32Z" />
         </svg>
-        <span class="text-4xl text-white font-semibold tracking-wide">The<span class="text-[#30DAC5]">Crypt</span></span>
+        <span class="text-2xl md:text-4xl text-white font-semibold tracking-wide">The<span class="text-[#30DAC5]">Crypt</span></span>
       </div>
 
-      <div class="flex items-center gap-5 text-2xl text-white tracking-widest">
+      <div class="flex items-center gap-5 text-lg md:text-2xl text-white tracking-widest">
           <a routerLink="/home">Home</a>
           <a routerLink="/compare">Compare</a>
           <a routerLink="/about">About</a>
@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="flex gap-4 items-center text-xl text-white">
+    <div class="flex gap-4 justify-center items-center text-xl text-white">
       <span *ngIf="user" class="tracking-wider">
         <a routerLink="/profile">{{ user.name }}</a>
       </span>
