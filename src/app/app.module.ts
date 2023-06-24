@@ -13,7 +13,9 @@ import { CompareComponent } from './compare/compare.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { ChartComponent } from './chart/chart.component';
+import { DropdownComponent } from './dropdown/dropdown.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { FormsModule } from '@angular/forms'
     CompareComponent,
     AboutComponent,
     ContactComponent,
-    ProfileComponent
+    ProfileComponent,
+    ChartComponent,
+    DropdownComponent
   ],
   imports: [
     BrowserModule,

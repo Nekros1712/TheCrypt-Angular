@@ -1,5 +1,5 @@
 <section class="w-full flex flex-col md:flex-row md:justify-evenly gap-10 items-center px-2 md:px-10 pt-6 md:py-10">
-	<div class="h-[calc(100vh-210px)] flex flex-col justify-center bg-[#1F1B24] px-4 md:px-8 py-2 rounded-2xl shadow-md shadow-[#0f0c13]">
+	<div class="h-[calc(100vh-200px)] md:h-[calc(100vh-160px)] flex flex-col justify-center bg-[#1F1B24] px-4 md:px-8 py-2 rounded-2xl shadow-md shadow-[#0f0c13]">
 		<div class="flex justify-between items-center text-white font-bold tracking-widest px-2 pb-2">
 			<span class="text-xl">Crypts</span>
 			<span class="text-lg">Currency: <span class="px-2 py-1 text-[#03DAC5]">USD</span></span>
@@ -29,7 +29,20 @@
 			<span *ngIf="!data.length" class="text-white text-2xl case italic">Your crypts are loading...<br /> Thank you for being patient</span>
 		</div>
 	</div>
-	<!-- <div class="hidden md:block">
-		
-	</div> -->
+	<div class="hidden w-1/3 md:flex flex-col gap-3">
+		<app-chart [coin]="coinNameA" />
+		<div class="flex justify-evenly">
+			<app-dropdown [items]="dropDownOptsA" [selectedItem]="selectedOptA" />
+			<svg class="w-24" viewBox="0 0 720 150" xmlns="http://www.w3.org/2000/svg">
+				<g>
+					<line stroke-width="15" y2="111" x2="653" y1="111" x1="81" stroke="#03dac5" fill="#03dac5" />
+					<line stroke-width="15" y2="76" x2="653" y1="76" x1="81" stroke="#03dac5" fill="#03dac5" />
+					<line stroke-width="15" y2="111" x2="653" y1="148" x1="546" stroke="#03dac5" fill="#03dac5" />
+					<line stroke-width="15" y2="38.5" x2="187" y1="76" x1="81" stroke="#03dac5" fill="#03dac5" />
+				</g>
+			</svg>
+			<app-dropdown [items]="dropDownOptsB" [selectedItem]="selectedOptB" />
+		</div>
+		<app-chart [coin]="coinNameB" />
+	</div>
 </section>

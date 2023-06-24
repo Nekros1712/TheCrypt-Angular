@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs'
+import axios from 'axios';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +14,9 @@ export class ApiDataService {
 
   getCoinsList(): Observable<any> {
     return this.http.get<any>(this.apiUrl)
+  }
+
+  getChart(coin: string) {
+    return axios.get(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=1&interval=hourly`)
   }
 }
