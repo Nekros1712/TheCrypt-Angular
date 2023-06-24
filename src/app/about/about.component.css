@@ -1,0 +1,15 @@
+.role {
+	color: #121212;
+	height: fit-content;
+	width: fit-content;
+	font-size: 40px;
+
+	text-shadow: 1px 5px 0 #03DAC5;
+	transform: rotate(-90deg);
+}
+
+@media (max-width: 767px) {
+	.role {
+		transform: rotate(0deg);
+	}
+}
