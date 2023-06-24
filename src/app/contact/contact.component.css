@@ -1,0 +1,34 @@
+.social {
+    z-index: 3;
+    width: fit-content;
+    font-size: 30px;
+    color: #03dac5;
+    padding: 0px 15px;
+    position: relative;
+    text-decoration: none;
+    transition: color ease 0.7s
+}
+
+.social:after {
+    position: absolute;
+    content: "";
+    height: 3px;
+    background: #03dac5;
+    bottom: 0;
+
+    width: 0;
+    z-index: -1;
+    left: 50%;
+
+    transition: width 0.3s ease, left 0.3s ease, height 0.3s ease 0.2s
+}
+
+.social:hover:after {
+    width: 100%;
+    height: 40px;
+    left: 0%;
+}
+
+.social:hover {
+    color: black
+}

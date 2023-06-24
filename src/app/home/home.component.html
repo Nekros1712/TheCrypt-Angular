@@ -1,9 +1,10 @@
 <section class="w-full flex flex-col md:flex-row md:justify-evenly gap-10 items-start px-2 md:px-10 pt-6 md:py-10">
-	<div class="h-[calc(100vh-200px)] flex flex-col justify-center bg-[#1F1B24] px-4 md:px-8 py-2 rounded-xl">
-		<div class="flex justify-between items-center text-white font-bold tracking-widest px-2">
+	<div class="h-[calc(100vh-200px)] flex flex-col justify-center bg-[#1F1B24] px-4 md:px-8 py-2 rounded-2xl shadow-md shadow-[#0f0c13]">
+		<div class="flex justify-between items-center text-white font-bold tracking-widest px-2 pb-2">
 			<span class="text-xl">Crypts</span>
 			<span class="text-lg">Currency: <span class="px-2 py-1 text-[#03DAC5]">USD</span></span>
 		</div>
+		<hr />
 		<div *ngIf="data.length" class="flex flex-col pt-2 overflow-auto">
 			<table class="table-auto border-separate border-spacing-2">
 				<thead class="text-md md:text-xl font-semibold">
@@ -18,8 +19,8 @@
 					<tr *ngFor="let item of data">
 						<td class="text-gray-200 text-left hidden md:block">{{item.market_cap_rank}} - <span class="uppercase italic">{{item.symbol}}</span></td>
 						<td class="text-gray-200 font-semibold text-left md:text-center">{{item.name}}</td>
-						<td class="text-gray-200 text-center">{{item.current_price}}</td>
-						<td [ngClass]="(item.price_change_percentage_24h < 0) ? 'bg-red-400 text-gray-900' : 'text-gray-200'" class="text-center rounded-lg">{{item.price_change_percentage_24h}}</td>
+						<td class="text-gray-200 text-center">{{+item.current_price.toFixed(3)}}</td>
+						<td [ngClass]="(item.price_change_percentage_24h < 0) ? 'bg-red-400 text-gray-900' : 'text-gray-200'" class="text-center rounded-lg">{{item.price_change_percentage_24h.toFixed(3)}}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -28,29 +29,7 @@
 			<span *ngIf="!data.length" class="text-white text-2xl case italic">Your crypts are loading...<br /> Thank you for being patient</span>
 		</div>
 	</div>
-	<div class="hidden md:block">
-		<p class="py-1 bg-[#03DAC5] rounded-sm text-center text-black font-bold">Latest News in Cryptocurrency world!</p>
-		<div>
-			<ul class="flex flex-col gap-5 py-2">
-				<li>
-					<div class="flex flex-col">
-						<span class="text-white text-xl">Title of the news goes here</span>
-						<span class="text-white text-sm font-light italic">Author name - 19.02.2023</span>
-					</div>
-				</li>
-				<li>
-					<div class="flex flex-col">
-						<span class="text-white text-xl">Title of the news goes here. This is a very huge and big title</span>
-						<span class="text-white text-sm font-light italic">Author name - 19.02.2023</span>
-					</div>
-				</li>
-				<li>
-					<div class="flex flex-col">
-						<span class="text-white text-xl">Title of the news goes here.</span>
-						<span class="text-white text-sm font-light italic">Author name - 19.02.2023</span>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</div>
+	<!-- <div class="hidden md:block">
+		
+	</div> -->
 </section>
