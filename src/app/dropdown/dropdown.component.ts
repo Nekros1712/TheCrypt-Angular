@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { ChartService } from '../chart.service'
+import { Component, Input } from '@angular/core'
 
 @Component({
   selector: 'app-dropdown',
@@ -9,14 +8,15 @@ import { ChartService } from '../chart.service'
 export class DropdownComponent {
   show: boolean = false
   toggle = () => this.show = !this.show
-
+  
   @Input() items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
   @Input() selectedItem: string = 'Item 1'
+  @Input() updateChart: (args: any) => void = (item: string) => {}
 
-  constructor(private chartService: ChartService) {}
+  constructor() {}
 
   select(item: string) {
-    this.chartService.setCoin(item)
+    this.updateChart(item)
     this.selectedItem = item
     this.toggle()
   }

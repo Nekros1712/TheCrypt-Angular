@@ -1,6 +1,5 @@
 import { Component } from '@angular/core'
 import { ApiDataService } from '../api-data.service'
-import { ChartService } from '../chart.service'
 
 @Component({
   selector: 'app-home',
@@ -9,23 +8,14 @@ import { ChartService } from '../chart.service'
 })
 export class HomeComponent {
   data: any = []
-  coinNameA = 'bitcoin'
-  coinNameB = 'ethereum'
 
+  coinA = 'bitcoin'
   dropDownOptsA = ['Bitcoin', 'Ethereum', 'Tether', 'Solana']
-  dropDownOptsB = ['Bitcoin', 'Ethereum', 'Tether', 'Solana']
-  selectedOptA = this.dropDownOptsA[0]
-  selectedOptB = this.dropDownOptsB[3]
+  updateChartA = (newCoin: string): string => this.coinA = newCoin
 
-  constructor(apiData: ApiDataService, private chartService: ChartService) {
+  constructor(apiData: ApiDataService) {
     apiData.getCoinsList().subscribe(coinData => {
       this.data = coinData
-    })
-  }
-
-  ngOnInit() {
-    this.chartService.currentData.subscribe(coin => {
-      this.coinNameA = coin.toLocaleLowerCase()
     })
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { ApiDataService } from '../api-data.service'
 import { Chart } from 'chart.js/auto'
 
@@ -38,6 +38,25 @@ export class ChartComponent {
     });
   }
 
+  updateChart(newCoin: string) {
+    let newLabels: any[] = []
+    let newData: any[] = []
+    this.apiData.getChart(newCoin.toLocaleLowerCase())
+      .then(res => {
+        res.data.prices.map((item: any) => {
+            newLabels.push(this.formatter(item[0]))
+            newData.push(item[1])
+            return null
+        })
+        this.chart.data.labels = newLabels
+        this.chart.data.datasets.forEach((dataset: any) => {
+          dataset.data = newData
+          dataset.label = newCoin
+        })
+        this.chart.update()
+      })
+  }
+
   constructor(private apiData: ApiDataService) {}
 
   ngOnInit() {
@@ -50,5 +69,10 @@ export class ChartComponent {
         })
         this.createChart()
       })
+  }
+
+  ngOnChanges(change: SimpleChanges) {
+    if(!change['coin'].isFirstChange())
+      this.updateChart(change['coin'].currentValue)
   }
 }
