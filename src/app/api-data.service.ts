@@ -12,11 +12,38 @@ export class ApiDataService {
 
   constructor(private http: HttpClient) { }
 
+  private formatter(timestamp: string) {
+    var date = new Date(timestamp).getDate()
+    var month = new Date(timestamp).getMonth() + 1
+    var hour = new Date(timestamp).getHours()
+    return date + "/" + month + ": " + hour;
+  }
+
+  private getChart(coin: string) {
+    return axios.get(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=1&interval=hourly`)
+  }
+
   getCoinsList(): Observable<any> {
     return this.http.get<any>(this.apiUrl)
   }
 
-  getChart(coin: string) {
-    return axios.get(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=1&interval=hourly`)
+  getData(coin: string) {
+    return new Promise((resolve, reject) => {
+      try {
+        let time: any = []
+        let price: any = []
+        this.getChart(coin.toLocaleLowerCase())
+          .then(res => {
+            res.data.prices.map((item: any) => {
+                time.push(this.formatter(item[0]))
+                price.push(item[1])
+                return null
+            })
+            resolve({time, price})
+          })
+      } catch (error) {
+        reject()
+      }
+    })
   }
 }
