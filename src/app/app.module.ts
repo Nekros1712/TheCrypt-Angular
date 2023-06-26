@@ -15,7 +15,8 @@ import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { ChartComponent } from './chart/chart.component';
-import { DropdownComponent } from './dropdown/dropdown.component'
+import { DropdownComponent } from './dropdown/dropdown.component';
+import { CoindataComponent } from './coindata/coindata.component'
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DropdownComponent } from './dropdown/dropdown.component'
     ContactComponent,
     ProfileComponent,
     ChartComponent,
-    DropdownComponent
+    DropdownComponent,
+    CoindataComponent
   ],
   imports: [
     BrowserModule,

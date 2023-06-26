@@ -13,7 +13,7 @@ export class ChartComponent {
   @Input() coin = ''
 
   create() {
-    this.apiData.getData(this.coin).then((res: any) => {
+    this.apiData.getChartData(this.coin).then((res: any) => {
       this.chart = new Chart(this.coin, {
         type: 'line',
         data: {
@@ -31,7 +31,7 @@ export class ChartComponent {
   }
 
   update(newCoin: string) {
-    this.apiData.getData(newCoin).then((res: any) => {
+    this.apiData.getChartData(newCoin).then((res: any) => {
       this.chart.data.labels = res.time
       this.chart.data.datasets.forEach((dataset: any) => {
         dataset.data = res.price

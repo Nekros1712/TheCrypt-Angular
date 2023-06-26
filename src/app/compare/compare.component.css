@@ -1,0 +1,21 @@
+.animate-vs {
+	position: relative;
+	opacity: 1;
+	z-index: 2;
+	animation: versus 0.5s ease-out;
+}
+
+@keyframes versus {
+	0% {
+		transform: scale(5, 3);
+		opacity: 1;
+	}
+	60% {
+		transform: scale(0.5, 0.5);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1, 1);
+		opacity: 1;
+	}
+}

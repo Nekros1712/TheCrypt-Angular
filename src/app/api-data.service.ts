@@ -19,7 +19,22 @@ export class ApiDataService {
     return date + "/" + month + ": " + hour;
   }
 
-  private getChart(coin: string) {
+  private bigNumFormat(num: number, digits: number) {
+
+		const lookup = [
+			{ value: 1, symbol: "" },
+			{ value: 1e3, symbol: "k" },
+			{ value: 1e6, symbol: "M" },
+			{ value: 1e9, symbol: "B" }
+		]
+
+		const rx = /\.0+$|(\.[0-9]*[1-9])0+$/
+		var item = lookup.slice().reverse().find(item => num >= item.value)
+
+		return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + " " + item.symbol : "0"
+	}
+
+  private getData(coin: string) {
     return axios.get(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=1&interval=hourly`)
   }
 
@@ -27,12 +42,12 @@ export class ApiDataService {
     return this.http.get<any>(this.apiUrl)
   }
 
-  getData(coin: string) {
+  getChartData(coin: string) {
     return new Promise((resolve, reject) => {
       try {
         let time: any = []
         let price: any = []
-        this.getChart(coin.toLocaleLowerCase())
+        this.getData(coin.toLocaleLowerCase())
           .then(res => {
             res.data.prices.map((item: any) => {
                 time.push(this.formatter(item[0]))
@@ -40,6 +55,39 @@ export class ApiDataService {
                 return null
             })
             resolve({time, price})
+          })
+      } catch (error) {
+        reject()
+      }
+    })
+  }
+
+  getCoinData(coin: string) {
+    return new Promise((resolve, reject) => {
+      try {
+        let data = {}
+        axios.get("https://api.coingecko.com/api/v3/coins/" + coin.toLocaleLowerCase() + "/")
+          .then(res => {
+            const obj = res.data
+            const marketData = obj.market_data
+            const cap = marketData.market_cap.usd || ''
+            const circ = marketData.circulating_supply || ''
+            const tot = marketData.total_supply || ''
+    
+            data = {
+              marketRank: obj.market_cap_rank,
+              currentPrice: marketData.current_price.usd || 0,
+              marketCap: this.bigNumFormat(parseFloat(cap), cap.length),
+              circSupply: this.bigNumFormat(parseFloat(circ), circ.length),
+              totalSupply: (tot !== null) ? this.bigNumFormat(parseFloat(tot), tot.length) : "na",
+              percentChange: {
+                day: Number(marketData.price_change_percentage_24h),
+                week: Number(marketData.price_change_percentage_7d),
+                month: Number(marketData.price_change_percentage_30d),
+                year: Number(marketData.price_change_percentage_1y)
+              }
+            }
+            resolve({ data })
           })
       } catch (error) {
         reject()
