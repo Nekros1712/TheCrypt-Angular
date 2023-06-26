@@ -60,7 +60,7 @@ export class ChartComponent {
   constructor(private apiData: ApiDataService) {}
 
   ngOnInit() {
-    this.apiData.getChart(this.coin)
+    this.apiData.getChart(this.coin.toLocaleLowerCase())
       .then(res => {
         res.data.prices.map((item: any) => {
             this.time.push(this.formatter(item[0]))
