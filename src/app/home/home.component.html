@@ -32,7 +32,7 @@
 	<div class="hidden w-1/3 md:flex flex-col gap-3">
 		<app-chart [coin]="coinA" />
 		<div class="flex justify-evenly">
-			<app-dropdown [items]="dropDownOptsA" [selectedItem]="'bitcoin'" [updateChart]="updateChartA" />
+			<app-dropdown [items]="dropDownOptsA" [selectedItem]="'bitcoin'" [updateCoin]="updateCoinA" />
 			<svg class="w-24" viewBox="0 0 720 150" xmlns="http://www.w3.org/2000/svg">
 				<g>
 					<line stroke-width="15" y2="111" x2="653" y1="111" x1="81" stroke="#03dac5" fill="#03dac5" />
@@ -41,7 +41,7 @@
 					<line stroke-width="15" y2="38.5" x2="187" y1="76" x1="81" stroke="#03dac5" fill="#03dac5" />
 				</g>
 			</svg>
-			<app-dropdown [items]="dropDownOptsB" [selectedItem]="'ethereum'" [updateChart]="updateChartB" />
+			<app-dropdown [items]="dropDownOptsB" [selectedItem]="'ethereum'" [updateCoin]="updateCoinB" />
 		</div>
 		<app-chart [coin]="coinB" />
 	</div>

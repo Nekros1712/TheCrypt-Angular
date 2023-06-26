@@ -11,11 +11,11 @@ export class HomeComponent {
 
   coinA = 'Bitcoin'
   dropDownOptsA = ['Bitcoin', 'Ethereum', 'Tether', 'Solana']
-  updateChartA = (newCoin: string): string => this.coinA = newCoin
+  updateCoinA = (newCoin: string): string => this.coinA = newCoin
 
   coinB = 'Ethereum'
   dropDownOptsB = ['Bitcoin', 'Ethereum', 'Tether', 'Solana']
-  updateChartB = (newCoin: string): string => this.coinB = newCoin
+  updateCoinB = (newCoin: string): string => this.coinB = newCoin
 
   constructor(apiData: ApiDataService) {
     apiData.getCoinsList().subscribe(coinData => {
