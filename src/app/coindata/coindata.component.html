@@ -1,5 +1,5 @@
 <div class="flex flex-col justify-center items-center tracking-wider py-3">
-	<span class="text-3xl text-[#03DAC5] font-semibold mb-5">{{ coin }}</span>
+	<span class="text-3xl text-[#03DAC5] font-semibold mb-5">{{ data.coin }}</span>
 	<div class="w-max text-xl flex justify-between items-center">
 		<ul class="list-none font-semibold flex flex-col justify-center">
 			<li>Market Rank</li>
@@ -16,11 +16,11 @@
 			<li>:</li>
 		</ul>
 		<ul class="list-none flex flex-col justify-center text-center">
-			<li>{{data.marketRank}}</li>
-			<li>{{data.currentPrice}}</li>
-			<li>{{data.marketCap}}</li>
-			<li>{{data.circSupply}}</li>
-			<li>{{data.totalSupply}}</li>
+			<li>{{coinData.marketRank}}</li>
+			<li>{{coinData.currentPrice}}</li>
+			<li>{{coinData.marketCap}}</li>
+			<li>{{coinData.circSupply}}</li>
+			<li>{{coinData.totalSupply}}</li>
 		</ul>
 	</div>
 	<span class="mt-5">Percent Change in Last...</span>
@@ -32,10 +32,10 @@
 			<td class="text-black bg-[#03dac5] rounded text-center px-3">1 Year</td>
 		</tr>
 		<tr>
-			<td class="text-center">{{data.percentChange.day.toFixed(3)}}</td>
-			<td class="text-center">{{data.percentChange.week.toFixed(3)}}</td>
-			<td class="text-center">{{data.percentChange.month.toFixed(3)}}</td>
-			<td class="text-center">{{data.percentChange.year.toFixed(3)}}</td>
+			<td class="text-center">{{coinData.percentChange.day.toFixed(3)}}</td>
+			<td class="text-center">{{coinData.percentChange.week.toFixed(3)}}</td>
+			<td class="text-center">{{coinData.percentChange.month.toFixed(3)}}</td>
+			<td class="text-center">{{coinData.percentChange.year.toFixed(3)}}</td>
 		</tr>
 	</table>
 </div>

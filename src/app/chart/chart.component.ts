@@ -10,16 +10,16 @@ import { Chart } from 'chart.js/auto'
 export class ChartComponent {
   public chart: any
 
-  @Input() coin = ''
+  @Input() data = { coin: '', id: '' }
 
   create() {
-    this.apiData.getChartData(this.coin).then((res: any) => {
-      this.chart = new Chart(this.coin, {
+    this.apiData.getChartData(this.data.id).then((res: any) => {
+      this.chart = new Chart(this.data.coin, {
         type: 'line',
         data: {
           labels: res.time, 
            datasets: [{
-              label: this.coin,
+              label: this.data.coin,
               data: res.price,
               backgroundColor: '#03dac5',
               borderWidth: 1,
@@ -30,12 +30,12 @@ export class ChartComponent {
     })
   }
 
-  update(newCoin: string) {
-    this.apiData.getChartData(newCoin).then((res: any) => {
+  update(data: any) {
+    this.apiData.getChartData(data.id).then((res: any) => {
       this.chart.data.labels = res.time
       this.chart.data.datasets.forEach((dataset: any) => {
         dataset.data = res.price
-        dataset.label = newCoin
+        dataset.label = data.coin
       })
       this.chart.update()
     })
@@ -48,7 +48,7 @@ export class ChartComponent {
   }
 
   ngOnChanges(change: SimpleChanges) {
-    if(!change['coin'].isFirstChange())
-      this.update(change['coin'].currentValue)
+    if(!change['data'].isFirstChange())
+      this.update(change['data'].currentValue)
   }
 }

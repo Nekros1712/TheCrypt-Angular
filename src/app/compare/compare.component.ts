@@ -6,11 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./compare.component.css']
 })
 export class CompareComponent {
-  coinA = 'Bitcoin'
-  dropDownOptsA = ['Bitcoin', 'Ethereum', 'Tether', 'Solana']
-  updateCoinAData = (newCoin: string): string => this.coinA = newCoin
+  dropDownOpts = {
+    'Bitcoin': 'bitcoin',
+    'Ethereum': 'ethereum',
+    'Tether': 'tether',
+    'Solana': 'solana',
+    'USD Coin': 'usd-coin'
+  }
+  
+  coinA = { coin: 'Bitcoin', id: 'bitcoin' }
+  updateCoinA = (data: any) => this.coinA = { coin: data.coin, id: data.id }
 
-  coinB = 'Ethereum'
-  dropDownOptsB = ['Bitcoin', 'Ethereum', 'Tether', 'Solana']
-  updateCoinBData = (newCoin: string): string => this.coinB = newCoin
+  coinB = { coin: 'Ethereum', id: 'ethereum' }
+  updateCoinB = (data: any) => this.coinB = { coin: data.coin, id: data.id }
 }

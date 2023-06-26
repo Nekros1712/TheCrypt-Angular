@@ -7,9 +7,9 @@ import { ApiDataService } from '../api-data.service'
   styleUrls: ['./coindata.component.css']
 })
 export class CoindataComponent {
-  @Input() coin = ''
+  @Input() data = { coin: '', id: '' }
 
-  data = {
+  coinData = {
     marketRank: '...',
     currentPrice: '...',
     marketCap: '...',
@@ -25,21 +25,21 @@ export class CoindataComponent {
 
   constructor(private apiService: ApiDataService) {}
 
-  update(coin: string) {
-    this.coin = coin
-    this.apiService.getCoinData(coin).then((res: any) => {
-      this.data = res.data
+  update(data: any) {
+    this.data = data
+    this.apiService.getCoinData(data.id).then((res: any) => {
+      this.coinData = res.data
     })
   }
 
   ngOnInit() {
-    this.apiService.getCoinData(this.coin).then((res: any) => {
-      this.data = res.data
+    this.apiService.getCoinData(this.data.id).then((res: any) => {
+      this.coinData = res.data
     })
   }
 
   ngOnChanges(change: SimpleChanges) {
-    if(!change['coin'].isFirstChange())
-      this.update(change['coin'].currentValue)
+    if(!change['data'].isFirstChange())
+      this.update(change['data'].currentValue)
   }
 }

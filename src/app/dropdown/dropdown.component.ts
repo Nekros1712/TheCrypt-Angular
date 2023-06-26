@@ -10,24 +10,24 @@ export class DropdownComponent {
   dropdownList: any[] = []
   toggle = () => this.show = !this.show
   
-  @Input() items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+  @Input() items: any = { 'Item 1': 'item-1' }
   @Input() selectedItem: string = 'Item 1'
   @Input() updateCoin: (args: any) => void = (item: string) => {}
 
   constructor() {}
 
   ngOnInit() {
-    this.dropdownList = this.items
+    this.dropdownList = Object.keys(this.items)
   }
 
   filterOptions(value: string) {
-    this.dropdownList = this.items.filter((item: string) => {
+    this.dropdownList = Object.keys(this.items).filter((item: string) => {
       return item.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) > -1
     })
   }
 
   select(item: string) {
-    this.updateCoin(item)
+    this.updateCoin({ coin: item, id: this.items[item] })
     this.selectedItem = item
     this.toggle()
   }
