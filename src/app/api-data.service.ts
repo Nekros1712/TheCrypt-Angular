@@ -9,7 +9,8 @@ import axios from 'axios';
 export class ApiDataService {
 
   apiUrl: string = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&locale=en'
-
+  dropdownData: any = {}
+  
   constructor(private http: HttpClient) { }
 
   private formatter(timestamp: string) {
@@ -92,6 +93,14 @@ export class ApiDataService {
       } catch (error) {
         reject()
       }
+    })
+  }
+
+  getDropdownList() {
+    this.getCoinsList().subscribe(coinData => {
+      coinData.forEach((coin: any) => {
+        this.dropdownData[coin.name] = coin.id
+      })
     })
   }
 }

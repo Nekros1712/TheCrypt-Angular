@@ -1,0 +1,17 @@
+/* width */
+.dropdown::-webkit-scrollbar {
+  display: block;
+  width: 4px;
+}
+
+/* Track */
+.dropdown::-webkit-scrollbar-track {
+  background: #1F1B24;
+  border-radius: 10px;
+}
+
+/* Handle */
+.dropdown::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 10px;
+}

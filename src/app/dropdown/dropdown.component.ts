@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, SimpleChanges } from '@angular/core'
 
 @Component({
   selector: 'app-dropdown',
@@ -21,6 +21,7 @@ export class DropdownComponent {
   }
 
   filterOptions(value: string) {
+    this.show = true
     this.dropdownList = Object.keys(this.items).filter((item: string) => {
       return item.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) > -1
     })
@@ -29,10 +30,16 @@ export class DropdownComponent {
   select(item: string) {
     this.updateCoin({ coin: item, id: this.items[item] })
     this.selectedItem = item
-    this.toggle()
+    this.show = false
   }
 
   selectCurrentTopResult() {
+    this.show = false
     this.select(this.dropdownList[0])
+  }
+
+  ngOnChanges(change: SimpleChanges) {
+    this.items = change['items'].currentValue
+    this.dropdownList = Object.keys(this.items)
   }
 }

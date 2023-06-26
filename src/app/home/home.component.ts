@@ -8,13 +8,7 @@ import { ApiDataService } from '../api-data.service'
 })
 export class HomeComponent {
   data: any = []
-  dropDownOpts = {
-    'Bitcoin': 'bitcoin',
-    'Ethereum': 'ethereum',
-    'Tether': 'tether',
-    'Solana': 'solana',
-    'USD Coin': 'usd-coin'
-  }
+  dropDownOpts = { 'Bitcoin': 'bitcoin', 'Ethereum': 'ethereum', 'Tether': 'tether' }
 
   coinA = { coin: 'Bitcoin', id: 'bitcoin' }
   updateCoinA = (data: any) => this.coinA = { coin: data.coin, id: data.id }
@@ -22,9 +16,14 @@ export class HomeComponent {
   coinB = { coin: 'Ethereum', id: 'ethereum' }
   updateCoinB = (data: any) => this.coinB = { coin: data.coin, id: data.id }
 
-  constructor(apiData: ApiDataService) {
-    apiData.getCoinsList().subscribe(coinData => {
+  constructor(private apiData: ApiDataService) {
+    this.apiData.getCoinsList().subscribe(coinData => {
       this.data = coinData
     })
+    apiData.getDropdownList()
+  }
+
+  ngOnInit() {
+    this.dropDownOpts = this.apiData.dropdownData
   }
 }
