@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs'
-import axios from 'axios';
+import { Injectable } from '@angular/core'
+import axios from 'axios'
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +9,7 @@ export class ApiDataService {
   apiUrl: string = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&locale=en'
   dropdownData: any = {}
   
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   private formatter(timestamp: string) {
     var date = new Date(timestamp).getDate()
@@ -39,8 +37,16 @@ export class ApiDataService {
     return axios.get(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=1&interval=hourly`)
   }
 
-  getCoinsList(): Observable<any> {
-    return this.http.get<any>(this.apiUrl)
+  getCoinsList() {
+    return new Promise((resolve, reject) => {
+      try {
+        axios.get(this.apiUrl).then(res => {
+          resolve(res.data)
+        })
+      } catch (error) {
+        reject()
+      }
+    })
   }
 
   getChartData(coin: string) {
@@ -97,10 +103,18 @@ export class ApiDataService {
   }
 
   getDropdownList() {
-    this.getCoinsList().subscribe(coinData => {
-      coinData.forEach((coin: any) => {
-        this.dropdownData[coin.name] = coin.id
-      })
+    return new Promise((resolve, reject) => {
+      try {
+        axios.get(this.apiUrl)
+          .then(res => {
+            res.data.forEach((coin: any) => {
+              this.dropdownData[coin.name] = coin.id
+            })
+            resolve({})
+          })
+      } catch (error) {
+        reject()
+      }
     })
   }
 }
