@@ -27,3 +27,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.active-nav {
+  color: #03DAC5;
+}
