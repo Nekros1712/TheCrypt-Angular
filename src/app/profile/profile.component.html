@@ -1,3 +1,116 @@
-<section class="w-full min-h-screen text-white flex flex-col gap-5 justify-center items-center">
-	<p>This is Profile of {{ currentUser }}</p>
+<section class="w-full h-[calc(100vh-100px)] flex justify-center items-start gap-10 md:px-10 pt-6">
+	
+	<div class="hidden md:flex h-[calc(100vh-200px)] md:h-[calc(100vh-160px)] flex-col justify-center bg-[#1F1B24] px-4 md:px-8 py-2 rounded-2xl shadow-md shadow-[#0f0c13]">
+		<div class="flex justify-between items-center text-white font-bold tracking-widest px-2 pb-2">
+			<span class="text-xl">Crypts</span>
+			<span class="text-lg">Currency: <span class="px-2 py-1 text-[#03DAC5]">USD</span></span>
+		</div>
+		<hr />
+		<div *ngIf="data.length" class="flex flex-col pt-2 overflow-auto">
+			<table class="table-auto border-separate border-spacing-2">
+				<thead class="text-md md:text-xl font-semibold">
+					<tr class="z-10">
+						<th class="text-[#03DAC5] bg-[#1F1B24] pr-8 rounded-xl md:rounded-sm sticky top-0 text-left hidden md:table-cell">Rank</th>
+						<th class="text-[#03DAC5] bg-[#1F1B24] pr-16 md:px-16 sticky top-0 text-left md:text-center">Currency</th>
+						<th class="text-[#03DAC5] bg-[#1F1B24] px-4 rounded-xl md:rounded-sm sticky top-0">Price</th>
+						<th class="text-[#03DAC5] bg-[#1F1B24] px-4 rounded-xl md:rounded-sm sticky top-0">Growth</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of data">
+						<td class="text-gray-200 text-left hidden md:block">{{item.market_cap_rank}} - <span class="uppercase italic">{{item.symbol}}</span></td>
+						<td class="text-gray-200 font-semibold text-left md:text-center">{{item.name}}</td>
+						<td class="text-gray-200 text-center">{{+item.current_price.toFixed(3)}}</td>
+						<td [ngClass]="(item.price_change_percentage_24h < 0) ? 'bg-red-400 text-gray-900' : 'text-gray-200'" class="text-center rounded-lg">{{item.price_change_percentage_24h.toFixed(3)}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div [ngClass]="data.length ? 'hidden' : ''" class="w-full h-full flex justify-center items-center px-24">
+			<span *ngIf="!data.length" class="text-white text-2xl case italic">Your crypts are loading...<br /> Thank you for being patient</span>
+		</div>
+	</div>
+
+	<div class="section text-center">
+
+		<input class="pricing" type="checkbox" id="pricing" name="pricing" />
+		<label for="pricing">
+			<span>My Bag
+				<span class="float-right">List View</span>
+			</span>
+		</label>
+
+		<div class="card-3d-wrap mx-auto mt-5">
+			<div class="card-3d-wrapper">
+
+				<div class="card-front">
+					<div class="pricing-wrap flex flex-col gap-5">
+						<div
+							class="flex flex-col justify-center bg-[#1F1B24] px-6 md:px-10 py-8 rounded-3xl shadow-md shadow-[#0f0c13]">
+							<span class="text-3xl text-[#03DAC5] font-semibold mb-5">My Bag</span>
+							<div class="w-full text-xl text-white flex justify-between items-center gap-5">
+								<ul class="list-none font-semibold flex flex-col text-left">
+									<li>Current Value</li>
+									<li>Invested Value</li>
+									<li>Pouch Value</li>
+									<li>Gain/Loss</li>
+								</ul>
+								<ul class="list-none flex flex-col justify-center px-5">
+									<li>:</li>
+									<li>:</li>
+									<li>:</li>
+									<li>:</li>
+								</ul>
+								<ul class="list-none flex flex-col justify-center text-center">
+									<li>120k</li>
+									<li>100k</li>
+									<li>10k</li>
+									<li>+20%</li>
+								</ul>
+							</div>
+						</div>
+						<app-chart [data]="coinA" />
+					</div>
+				</div>
+
+				<div class="card-back">
+					<div class="pricing-wrap">
+						<div class="flex h-[calc(100vh-200px)] md:h-[calc(100vh-160px)] flex-col justify-center bg-[#1F1B24] px-4 md:px-8 py-2 rounded-2xl shadow-md shadow-[#0f0c13]">
+							<div class="flex justify-between items-center text-white font-bold tracking-widest px-2 pb-2">
+								<span class="text-xl">Crypts</span>
+								<span class="text-lg">Currency: <span class="px-2 py-1 text-[#03DAC5]">USD</span></span>
+							</div>
+							<hr />
+							<div *ngIf="data.length" class="flex flex-col pt-2 overflow-auto">
+								<table class="table-auto border-separate border-spacing-2">
+									<thead class="text-md md:text-xl font-semibold">
+										<tr class="z-10">
+											<th class="text-[#03DAC5] bg-[#1F1B24] pr-8 rounded-xl md:rounded-sm sticky top-0 text-left hidden md:table-cell">Rank</th>
+											<th class="text-[#03DAC5] bg-[#1F1B24] pr-16 md:px-16 sticky top-0 text-left md:text-center">Currency</th>
+											<th class="text-[#03DAC5] bg-[#1F1B24] px-4 rounded-xl md:rounded-sm sticky top-0">Price</th>
+											<th class="text-[#03DAC5] bg-[#1F1B24] px-4 rounded-xl md:rounded-sm sticky top-0">Growth</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let item of data">
+											<td class="text-gray-200 text-left hidden md:block">{{item.market_cap_rank}} - <span class="uppercase italic">{{item.symbol}}</span></td>
+											<td class="text-gray-200 font-semibold text-left md:text-center">{{item.name}}</td>
+											<td class="text-gray-200 text-center">{{+item.current_price.toFixed(3)}}</td>
+											<td [ngClass]="(item.price_change_percentage_24h < 0) ? 'bg-red-400 text-gray-900' : 'text-gray-200'" class="text-center rounded-lg">{{item.price_change_percentage_24h.toFixed(3)}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div [ngClass]="data.length ? 'hidden' : ''" class="w-full h-full flex justify-center items-center px-24">
+								<span *ngIf="!data.length" class="text-white text-2xl case italic">Your crypts are loading...<br /> Thank you for being patient</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
 </section>
