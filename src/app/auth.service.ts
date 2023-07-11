@@ -5,11 +5,15 @@ import { SocialAuthService } from '@abacritt/angularx-social-login'
   providedIn: 'root'
 })
 export class AuthService {
-  private apiURI = 'http://localhost:3000'
+
+  token: string = ''
   
   constructor(
     private authService: SocialAuthService
   ) {}
+
+  getToken() { return this.token }
+  setToken(newToken: string) { this.token = newToken }
   
   isAuthenticated() {
     let loggedIn = false

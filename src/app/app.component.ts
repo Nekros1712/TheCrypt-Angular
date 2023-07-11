@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { SocialAuthService } from '@abacritt/angularx-social-login'
 import { Router } from '@angular/router'
+import { AuthService } from './auth.service'
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,15 @@ export class AppComponent {
 
   constructor(
     private router: Router,
+    private auth: AuthService,
     private authService: SocialAuthService
   ) {}
 
   ngOnInit() {
     this.authService.authState.subscribe(user => {
       this.user = user
+      this.auth.setToken(user.idToken)
+      console.log(user)
       this.loggedIn = !!user
     })
   }

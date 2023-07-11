@@ -6,7 +6,8 @@ import axios from 'axios'
 })
 export class ApiDataService {
 
-  apiUrl: string = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&locale=en'
+  backendApiUrl: string = 'http://localhost:3000/api/'
+  coingeckoApiUrl: string = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&locale=en'
   dropdownData: any = {}
   
   constructor() { }
@@ -40,7 +41,7 @@ export class ApiDataService {
   getCoinsList() {
     return new Promise((resolve, reject) => {
       try {
-        axios.get(this.apiUrl).then(res => {
+        axios.get(this.coingeckoApiUrl).then(res => {
           resolve(res.data)
         })
       } catch (error) {
@@ -105,7 +106,7 @@ export class ApiDataService {
   getDropdownList() {
     return new Promise((resolve, reject) => {
       try {
-        axios.get(this.apiUrl)
+        axios.get(this.coingeckoApiUrl)
           .then(res => {
             res.data.forEach((coin: any) => {
               this.dropdownData[coin.name] = coin.id
@@ -114,6 +115,19 @@ export class ApiDataService {
           })
       } catch (error) {
         reject()
+      }
+    })
+  }
+
+  getBagData(token: string) {
+    return new Promise((resolve, reject) => {
+      try {
+        axios.get(this.backendApiUrl + 'getbagdata', { params: { token } })
+          .then(res => {
+            resolve(res)
+          })
+      } catch (error) {
+        reject(error)
       }
     })
   }

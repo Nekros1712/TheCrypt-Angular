@@ -48,7 +48,7 @@
 						<div
 							class="flex flex-col justify-center bg-[#1F1B24] px-6 md:px-10 py-8 rounded-3xl shadow-md shadow-[#0f0c13]">
 							<span class="text-3xl text-[#03DAC5] font-semibold mb-5">My Bag</span>
-							<div class="w-full text-xl text-white flex justify-between items-center gap-5">
+							<div class="w-full text-xl text-gray-200 flex justify-between items-center gap-5">
 								<ul class="list-none font-semibold flex flex-col text-left">
 									<li>Current Value</li>
 									<li>Invested Value</li>
@@ -61,11 +61,11 @@
 									<li>:</li>
 									<li>:</li>
 								</ul>
-								<ul class="list-none flex flex-col justify-center text-center">
-									<li>120k</li>
-									<li>100k</li>
-									<li>10k</li>
-									<li>+20%</li>
+								<ul class="list-none flex flex-col justify-center text-center tracking-wider">
+									<li>{{ +bagData.currentValue.toFixed(3) }}</li>
+									<li>{{ bagData.investedValue }}</li>
+									<li>{{ bagData.pouch }}</li>
+									<li [ngClass]="(gainLoss < 0) ? 'bg-red-400 text-gray-900' : 'text-[#03DAC5]'" class="font-medium rounded-md px-3">{{ +gainLoss.toFixed(2) + '%' }}</li>
 								</ul>
 							</div>
 						</div>
