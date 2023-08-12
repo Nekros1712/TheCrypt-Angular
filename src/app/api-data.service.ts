@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, isDevMode } from '@angular/core'
 import axios from 'axios'
 
 @Injectable({
@@ -6,9 +6,12 @@ import axios from 'axios'
 })
 export class ApiDataService {
 
-  backendApiUrl: string = 'https://thecryptserver.cyclic.app/api/'
+  remoteBackendApiUrl: string = 'https://thecryptserver.cyclic.app/api/'
+  localBackendApiUrl: string = 'http://localhost:3000/api/'
   coingeckoApiUrl: string = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&locale=en'
   dropdownData: any = {}
+
+  backendApiUrl: string = isDevMode() ? this.localBackendApiUrl : this.remoteBackendApiUrl
   
   constructor() { }
 
@@ -35,7 +38,7 @@ export class ApiDataService {
 	}
 
   private getData(coin: string) {
-    return axios.get(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=1&interval=hourly`)
+    return axios.get(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=10&interval=daily&precision=3`)
   }
 
   getCoinsList() {
@@ -126,6 +129,17 @@ export class ApiDataService {
           .then(res => {
             resolve(res)
           })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  getInvestmentsList(token: string) {
+    return new Promise((resolve, reject) => {
+      try {
+        axios.get(this.backendApiUrl + 'getinvestmentslist', { params: { token } })
+          .then(res => { resolve(res) })
       } catch (error) {
         reject(error)
       }

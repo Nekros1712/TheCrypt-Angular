@@ -22,10 +22,13 @@ export class ProfileComponent {
     private apiData: ApiDataService,
     private authService: SocialAuthService
   ) {
-    this.token = auth.getToken()
+    this.token = this.auth.getToken()
     this.apiData.getCoinsList().then(coinData => {
       this.data = coinData
     })
+    // this.apiData.getInvestmentsList(this.token).then(coinData => {
+    //   this.data = coinData
+    // })
     this.apiData.getBagData(this.token).then((res: any) => {
       this.bagData = res.data
       this.gainLoss = ((this.bagData.currentValue - this.bagData.investedValue) / this.bagData.investedValue) * 100
