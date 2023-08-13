@@ -11,15 +11,14 @@ export class ApiDataService {
   coingeckoApiUrl: string = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&locale=en'
   dropdownData: any = {}
 
-  backendApiUrl: string = isDevMode() ? this.localBackendApiUrl : this.remoteBackendApiUrl
+  backendApiUrl: string =  this.remoteBackendApiUrl
   
   constructor() { }
 
   private formatter(timestamp: string) {
     var date = new Date(timestamp).getDate()
     var month = new Date(timestamp).getMonth() + 1
-    var hour = new Date(timestamp).getHours()
-    return date + "/" + month + ": " + hour;
+    return date + "/" + month;
   }
 
   private bigNumFormat(num: number, digits: number) {
@@ -139,6 +138,17 @@ export class ApiDataService {
     return new Promise((resolve, reject) => {
       try {
         axios.get(this.backendApiUrl + 'getinvestmentslist', { params: { token } })
+          .then(res => { resolve(res) })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  getInvestmentChart(token: string) {
+    return new Promise((resolve, reject) => {
+      try {
+        axios.get(this.backendApiUrl + 'getinvestmentchart', { params: { token } })
           .then(res => { resolve(res) })
       } catch (error) {
         reject(error)

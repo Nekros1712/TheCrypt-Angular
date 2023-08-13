@@ -137,8 +137,8 @@
 										<tr *ngFor="let item of data">
 											<td class="text-gray-200 text-left hidden md:block">{{item.market_cap_rank}} - <span class="uppercase italic">{{item.symbol}}</span></td>
 											<td class="text-gray-200 font-semibold text-left md:text-center">{{item.name}}</td>
-											<td class="text-gray-200 text-center">{{+item.current_price.toFixed(3)}}</td>
-											<td [ngClass]="(item.price_change_percentage_24h < 0) ? 'bg-red-400 text-gray-900' : 'text-gray-200'" class="text-center rounded-lg">{{item.price_change_percentage_24h.toFixed(3)}}</td>
+											<td class="text-gray-200 text-center">{{item.current_price}}</td>
+											<td [ngClass]="(item.price_change_percentage_24h < 0) ? 'bg-red-400 text-gray-900' : 'text-gray-200'" class="text-center rounded-lg">{{item.price_change_percentage_24h}}</td>
 										</tr>
 									</tbody>
 								</table>
