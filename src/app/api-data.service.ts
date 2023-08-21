@@ -7,11 +7,11 @@ import axios from 'axios'
 export class ApiDataService {
 
   remoteBackendApiUrl: string = 'https://thecryptserver.cyclic.app/api/'
-  localBackendApiUrl: string = 'http://localhost:3000/api/'
+  localBackendApiUrl: string = 'https://friendly-rotary-phone-w5g7gqvx475fvv45-3000.app.github.dev/api/'
   coingeckoApiUrl: string = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&locale=en'
   dropdownData: any = {}
 
-  backendApiUrl: string = isDevMode() ? this.localBackendApiUrl : this.remoteBackendApiUrl
+  backendApiUrl: string = this.remoteBackendApiUrl
   
   constructor() { }
 

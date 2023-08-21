@@ -21,7 +21,6 @@ export class DropdownComponent {
   }
 
   filterOptions(value: string) {
-    this.show = true
     this.dropdownList = Object.keys(this.items).filter((item: string) => {
       return item.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) > -1
     })
