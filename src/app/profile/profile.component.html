@@ -36,8 +36,8 @@
 		
 		<div class="w-full hidden md:flex h-[calc(100vh-200px)] md:h-[35vh] flex-col justify-start items-center bg-[#1F1B24] px-4 pt-2 pb-4 rounded-2xl shadow-md shadow-[#0f0c13]">
 			<div class="w-full flex gap-5 justify-start items-center text-white font-bold tracking-widest pl-2 py-2">
-				<span class="text-xl text-[#03DAC5]">Buy</span>
-				<span class="text-xl">Sell</span>
+				<span (click)="activeAction = 'buy'" [ngClass]="activeAction === 'buy' ? 'text-[#03DAC5]' : ''" class="text-xl">Buy</span>
+				<span (click)="activeAction = 'sell'" [ngClass]="activeAction === 'sell' ? 'text-[#03DAC5]' : ''" class="text-xl">Sell</span>
 			</div>
 
 			<form action="#" class="w-full h-full px-2">
@@ -75,7 +75,8 @@
 					<span>Pouch Remaining: </span><span>2314</span>
 				</div>
 				<div class="w-1/2 flex justify-center items-center">
-					<button class="w-full text-gray-900 bg-green-400 rounded py-1">Buy Now</button>
+					<button *ngIf="activeAction === 'buy'" class="w-full text-gray-900 bg-green-400 rounded py-1">Buy Now</button>
+					<button *ngIf="activeAction === 'sell'" class="w-full text-gray-900 bg-red-400 rounded py-1">Sell Now</button>
 				</div>
 			</div>
 		</div>

@@ -16,6 +16,8 @@ export class ProfileComponent {
   bagData: any = {}
   gainLoss: any = 0
   coinA = { coin: 'Bitcoin', id: 'bitcoin' }
+
+  activeAction: string = 'buy'
   
   constructor(
     private auth: AuthService,
