@@ -17,7 +17,7 @@ export class HomeComponent {
   updateCoinB = (data: any) => this.coinB = { coin: data.coin, id: data.id }
 
   constructor(private apiData: ApiDataService) {
-    this.apiData.getCoinsList().then(coinData => {
+    this.apiData.getCoinsList().then((coinData: any) => {
       this.data = coinData
     })
     apiData.getDropdownList()

@@ -1,5 +1,5 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { ApiDataService } from '../api-data.service'
+import { ApiDataService } from '../api-data.service';
 
 @Component({
   selector: 'app-coindata',
@@ -7,7 +7,7 @@ import { ApiDataService } from '../api-data.service'
   styleUrls: ['./coindata.component.css']
 })
 export class CoindataComponent {
-  @Input() data = { coin: '', id: '' }
+  @Input() data = { coin: '', id: '' };
 
   coinData = {
     marketRank: '...',
@@ -21,25 +21,30 @@ export class CoindataComponent {
       month: 0,
       year: 0
     }
-  }
+  };
 
   constructor(private apiService: ApiDataService) {}
 
   update(data: any) {
-    this.data = data
-    this.apiService.getCoinData(data.id).then((res: any) => {
-      this.coinData = res.data
-    })
+    this.data = data;
+    const cachedData = localStorage.getItem(data.id);
+    if (cachedData) {
+      this.coinData = JSON.parse(cachedData);
+    } else {
+      this.apiService.getCoinData(data.id).then((res: any) => {
+        this.coinData = res.data;
+        localStorage.setItem(data.id, JSON.stringify(res.data));
+      });
+    }
   }
 
   ngOnInit() {
-    this.apiService.getCoinData(this.data.id).then((res: any) => {
-      this.coinData = res.data
-    })
+    this.update(this.data);
   }
 
   ngOnChanges(change: SimpleChanges) {
-    if(!change['data'].isFirstChange())
-      this.update(change['data'].currentValue)
+    if (!change['data'].isFirstChange()) {
+      this.update(change['data'].currentValue);
+    }
   }
 }
